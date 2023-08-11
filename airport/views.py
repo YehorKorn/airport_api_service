@@ -130,15 +130,11 @@ class FlightViewSet(
     queryset = (
         Flight.objects.all()
         .prefetch_related(
-            "crews",
-            "airplane__airplane_type",
-            "route__source",
-            "route__destination"
+            "crews", "airplane__airplane_type", "route__source", "route__destination"
         )
         .annotate(
             tickets_available=(
-                F("airplane__rows") * F("airplane__seats_in_row")
-                - Count("tickets")
+                F("airplane__rows") * F("airplane__seats_in_row") - Count("tickets")
             )
         )
     )
@@ -188,10 +184,7 @@ class FlightViewSet(
             OpenApiParameter(
                 "departure_time",
                 type=OpenApiTypes.DATETIME,
-                description=(
-                    "Filter by date of Flight "
-                    "(ex. ?date=2022-10-23)"
-                ),
+                description=("Filter by date of Flight " "(ex. ?date=2022-10-23)"),
             ),
         ]
     )
