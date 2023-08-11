@@ -15,6 +15,7 @@ router = routers.DefaultRouter()
 router.register("flights", FlightViewSet)
 router.register("crews", CrewViewSet)
 router.register("airplanes", AirplaneViewSet)
+router.register("airplane_types", AirplaneTypeViewSet)
 
 urlpatterns = [path("", include(router.urls))]
 
