@@ -29,6 +29,10 @@ class Airplane(models.Model):
     def capacity(self) -> int:
         return self.rows * self.seats_in_row
 
+    @property
+    def information(self) -> str:
+        return f"{self.name} {self.airplane_type.name}"
+
     def __str__(self):
         return self.name
 
@@ -48,6 +52,13 @@ class Crew(models.Model):
 class Airport(models.Model):
     name = models.CharField(max_length=255)
     closest_big_city = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.name} - {self.closest_big_city}"
+
+    @property
+    def information(self):
+        return f"{self.name} - {self.closest_big_city}"
 
 
 class Route(models.Model):
