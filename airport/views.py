@@ -19,6 +19,7 @@ from airport.models import (
     Flight,
     Order,
 )
+from airport.pagination import OrderPagination
 from airport.permissions import IsAdminOrIfAuthenticatedReadOnly
 
 from airport.serializers import (
@@ -192,11 +193,6 @@ class FlightViewSet(
     )
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
-
-
-class OrderPagination(PageNumberPagination):
-    page_size = 10
-    max_page_size = 100
 
 
 class OrderViewSet(
