@@ -184,7 +184,7 @@ class FlightViewSet(
             OpenApiParameter(
                 "departure_time",
                 type=OpenApiTypes.DATETIME,
-                description=("Filter by date of Flight " "(ex. ?date=2022-10-23)"),
+                description="Filter by date of Flight (ex. ?date=2022-10-23)",
             ),
         ]
     )
