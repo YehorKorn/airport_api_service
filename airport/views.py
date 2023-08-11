@@ -118,3 +118,77 @@ class AirplaneViewSet(
             return AirplaneImageSerializer
 
         return AirplaneSerializer
+
+
+class FlightViewSet(
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    GenericViewSet,
+):
+    queryset = (
+        Flight.objects.all()
+        .prefetch_related("crews", "airplane", "route__source", "route__destination")
+        .annotate(
+            tickets_available=(
+                F("airplane__rows") * F("airplane__seats_in_row")
+                - Count("tickets")
+            )
+        )
+    )
+    serializer_class = FlightSerializer
+    permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
+
+    def get_queryset(self):
+        departure_time = self.request.query_params.get("date")
+        source = self.request.query_params.get("source")
+        destination = self.request.query_params.get("destination")
+
+        queryset = self.queryset
+
+        if departure_time:
+            departure_time = datetime.strptime(departure_time, "%Y-%m-%d")
+            queryset = queryset.filter(departure_time__date=departure_time)
+
+        if source:
+            queryset = queryset.filter(route__source__name=source)
+
+        if destination:
+            queryset = queryset.filter(route__destination__name=destination)
+
+        return queryset.distinct()
+
+    def get_serializer_class(self):
+        if self.action == "list":
+            return FlightListSerializer
+
+        if self.action == "retrieve":
+            return FlightDetailSerializer
+
+        return FlightSerializer
+
+    @extend_schema(
+        parameters=[
+            OpenApiParameter(
+                "source",
+                type=OpenApiTypes.STR,
+                description="Filter by source (ex. ?source=Kyiv)",
+            ),
+            OpenApiParameter(
+                "destination",
+                type=OpenApiTypes.STR,
+                description="Filter by destination (ex. ?destination=Lviv)",
+            ),
+            OpenApiParameter(
+                "departure_time",
+                type=OpenApiTypes.DATETIME,
+                description=(
+                    "Filter by date of Flight "
+                    "(ex. ?date=2022-10-23)"
+                ),
+            ),
+        ]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
