@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 (
                     "image",
                     models.ImageField(
-                        null=True, upload_to=airport.models.movie_image_file_path
+                        null=True, upload_to=airport.models.airplane_image_file_path
                     ),
                 ),
             ],

@@ -11,11 +11,11 @@ class AirplaneType(models.Model):
     name = models.CharField(max_length=255)
 
 
-def movie_image_file_path(instance, filename):
+def airplane_image_file_path(instance, filename):
     _, extension = os.path.splitext(filename)
     filename = f"{slugify(instance.name)}-{uuid.uuid4()}{extension}"
 
-    return os.path.join("uploads/movies/", filename)
+    return os.path.join("uploads/airplanes/", filename)
 
 
 class Airplane(models.Model):
@@ -23,7 +23,7 @@ class Airplane(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
     airplane_type = models.ForeignKey(AirplaneType, on_delete=models.CASCADE)
-    image = models.ImageField(null=True, upload_to=movie_image_file_path)
+    image = models.ImageField(null=True, upload_to=airplane_image_file_path)
 
     @property
     def capacity(self) -> int:
