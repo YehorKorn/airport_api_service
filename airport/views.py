@@ -93,6 +93,15 @@ class AirplaneViewSet(
     serializer_class = AirplaneSerializer
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
 
+    def get_serializer_class(self):
+        if self.action == "list":
+            return AirplaneListSerializer
+
+        if self.action == "upload_image":
+            return AirplaneImageSerializer
+
+        return AirplaneSerializer
+
     @action(
         methods=["POST"],
         detail=True,
@@ -109,15 +118,6 @@ class AirplaneViewSet(
             return Response(serializer.data, status=status.HTTP_200_OK)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def get_serializer_class(self):
-        if self.action == "list":
-            return AirplaneListSerializer
-
-        if self.action == "upload_image":
-            return AirplaneImageSerializer
-
-        return AirplaneSerializer
 
 
 class FlightViewSet(
