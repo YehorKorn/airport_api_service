@@ -1,4 +1,4 @@
-# Pet_project_airport_api_service
+# Airport_api_service
 
 You can register on this api_service. 
 You can get api for Airplane, AirplaneType, Crew, Airport, Route, Flight, Order.
