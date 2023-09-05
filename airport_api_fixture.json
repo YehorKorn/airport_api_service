@@ -1,0 +1,176 @@
+[
+  {
+    "model": "user.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$lmqB3GIA1O43yKU4Qe0hAj$S6SfnNjzNVRzGFktlahreffbsxudyNTm3h+fvQBUfWs=",
+      "email": "admin@admin.com",
+      "first_name": "John",
+      "last_name": "Doe",
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true,
+      "date_joined": "2023-08-01T08:00:00Z"
+    }
+  },
+  {
+    "model": "airport.airplanetype",
+    "pk": 1,
+    "fields": {
+      "name": "Boeing 747"
+    }
+  },
+  {
+    "model": "airport.airplanetype",
+    "pk": 2,
+    "fields": {
+      "name": "Airbus A380"
+    }
+  },
+  {
+    "model": "airport.airplane",
+    "pk": 1,
+    "fields": {
+      "name": "Airplane 1",
+      "rows": 10,
+      "seats_in_row": 6,
+      "airplane_type": 1,
+      "image": "uploads/airplanes/airplane1.jpg"
+    }
+  },
+  {
+    "model": "airport.airplane",
+    "pk": 2,
+    "fields": {
+      "name": "Airplane 2",
+      "rows": 8,
+      "seats_in_row": 4,
+      "airplane_type": 2,
+      "image": "uploads/airplanes/airplane2.jpg"
+    }
+  },
+  {
+    "model": "airport.crew",
+    "pk": 1,
+    "fields": {
+      "first_name": "John",
+      "last_name": "Doe"
+    }
+  },
+  {
+    "model": "airport.crew",
+    "pk": 2,
+    "fields": {
+      "first_name": "Jane",
+      "last_name": "Smith"
+    }
+  },
+  {
+    "model": "airport.airport",
+    "pk": 1,
+    "fields": {
+      "name": "Airport 1",
+      "closest_big_city": "City 1"
+    }
+  },
+  {
+    "model": "airport.airport",
+    "pk": 2,
+    "fields": {
+      "name": "Airport 2",
+      "closest_big_city": "City 2"
+    }
+  },
+  {
+    "model": "airport.route",
+    "pk": 1,
+    "fields": {
+      "source": 1,
+      "destination": 2
+    }
+  },
+  {
+    "model": "airport.route",
+    "pk": 2,
+    "fields": {
+      "source": 2,
+      "destination": 1
+    }
+  },
+  {
+    "model": "airport.flight",
+    "pk": 1,
+    "fields": {
+      "route": 1,
+      "airplane": 1,
+      "departure_time": "2023-08-15T10:00:00Z",
+      "arrival_time": "2023-08-15T12:00:00Z"
+    }
+  },
+  {
+    "model": "airport.flight",
+    "pk": 2,
+    "fields": {
+      "route": 2,
+      "airplane": 2,
+      "departure_time": "2023-08-16T08:00:00Z",
+      "arrival_time": "2023-08-16T14:00:00Z"
+    }
+  },
+  {
+    "model": "airport.order",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "created_at": "2023-08-01T08:00:00Z"
+    }
+  },
+  {
+    "model": "airport.order",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "created_at": "2023-08-02T10:00:00Z"
+    }
+  },
+  {
+    "model": "airport.ticket",
+    "pk": 1,
+    "fields": {
+      "flight": 1,
+      "order": 1,
+      "row": 1,
+      "seat": 3
+    }
+  },
+  {
+    "model": "airport.ticket",
+    "pk": 2,
+    "fields": {
+      "flight": 2,
+      "order": 1,
+      "row": 2,
+      "seat": 5
+    }
+  },
+  {
+    "model": "airport.ticket",
+    "pk": 3,
+    "fields": {
+      "flight": 1,
+      "order": 2,
+      "row": 3,
+      "seat": 2
+    }
+  },
+  {
+    "model": "airport.ticket",
+    "pk": 4,
+    "fields": {
+      "flight": 2,
+      "order": 2,
+      "row": 4,
+      "seat": 7
+    }
+  }
+]
